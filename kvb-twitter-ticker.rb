@@ -7,7 +7,7 @@ require 'redis'
 
 uri = URI.parse(ENV["REDISTOGO_URL"])
 REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-URL = 'http://www.kvb-koeln.de/german/home/mofis.html'
+URL = 'http://www.kvb-koeln.de/mofis/ticker_details.html'
 USER_AGENT = 'Mozilla/5.0 (KVB-Twitter-Ticker-Bot: http://github.com/Holek/kvb-twitter-ticker) @KVBStoerungen'
 
 Twitter.configure do |config|
