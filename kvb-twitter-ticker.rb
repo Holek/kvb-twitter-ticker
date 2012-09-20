@@ -69,7 +69,7 @@ while true
         i=0
         text_parts.reverse.each do |text|
           i= i+1
-          post(text + " (#{i+1}/#{text_parts.size})")
+          post(text + " (#{i}/#{text_parts.size})")
         end
       end
       REDIS.hmset('texts', hash, '1')
