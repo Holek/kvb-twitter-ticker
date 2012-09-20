@@ -24,9 +24,16 @@ Twitter.connection_options[:headers][:user_agent] = USER_AGENT
 
 # curl http://www.kvb-koeln.de/mofis/ticker_details.html -H 'Referer: http://www.kvb-koeln.de/german/home/mofis.html' -H 'User-Agent: Mozilla/5.0 (KVB-Twitter-Ticker-Bot: http://github.com/Holek/kvb-twitter-ticker) @KVBStoerungen'
 
-def post(text)
-  puts text
-  Twitter.update(text)
+if ENV['RUBY_ENV'] == 'production'
+  def post(text)
+    Twitter.update(text)
+    rate_limit_status = Twitter.rate_limit_status
+    puts "#{rate_limit_status.remaining_hits} Twitter API request(s) remaining for the next #{((rate_limit_status.reset_time - Time.now) / 60).floor} minutes and #{((rate_limit_status.reset_time - Time.now) % 60).round} seconds"
+  end
+else
+  def post(text)
+    puts text
+  end
 end
 
 while true
