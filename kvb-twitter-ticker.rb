@@ -66,12 +66,15 @@ while true
           end
           i = i+1
         end
-        text_parts.each_with_index do |text, i|
+        i=0
+        text_parts.reverse.each do |text|
+          i= i+1
           post(text + " (#{i+1}/#{text_parts.size})")
         end
       end
       REDIS.hmset('texts', hash, '1')
       hashes << hash
+      sleep 5
     end
     REDIS.hdel('texts', *(hash_keys - hashes))
   rescue
