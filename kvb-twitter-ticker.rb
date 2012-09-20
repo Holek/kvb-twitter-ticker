@@ -47,6 +47,7 @@ while true
       text = text.strip
       if text.length <= 140
         post(text)
+        sleep 5
       else
         done = false
         text_part = nil
@@ -71,10 +72,10 @@ while true
           i= i+1
           post(text + " (#{i}/#{text_parts.size})")
         end
+        sleep 5
       end
       REDIS.hmset('texts', hash, '1')
       hashes << hash
-      sleep 5
     end
     REDIS.hdel('texts', *(hash_keys - hashes))
   rescue
