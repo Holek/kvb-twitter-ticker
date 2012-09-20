@@ -67,10 +67,10 @@ while true
           end
           i = i+1
         end
-        i=0
+        i = text_parts.size
         text_parts.reverse.each do |text|
-          i= i+1
           post(text + " (#{i}/#{text_parts.size})")
+          i = i-1
         end
         sleep 5
       end
